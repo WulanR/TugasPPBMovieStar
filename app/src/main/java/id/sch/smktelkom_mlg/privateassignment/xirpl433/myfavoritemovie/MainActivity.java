@@ -1,9 +1,9 @@
 package id.sch.smktelkom_mlg.privateassignment.xirpl433.myfavoritemovie;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -17,7 +17,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import id.sch.smktelkom_mlg.privateassignment.xirpl433.myfavoritemovie.adapter.SourceAdapter;
+
+public class MainActivity extends AppCompatActivity implements SourceAdapter.ISourceAdapter {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -49,8 +51,6 @@ public class MainActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(mViewPager);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -79,11 +79,18 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.ic_about) {
+            Intent intent = new Intent(this, AboutActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void showArticles(String id, String name, String sortBy) {
+
     }
 
     /**
@@ -135,7 +142,14 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            if (position == 0)
+                return new NowPlayingFragment();
+            else if (position == 1)
+                return new ComingSoonFragment();
+            else if (position == 2)
+                return new TopRateFragment();
+            else
+                return PlaceholderFragment.newInstance(position + 1);
         }
 
         @Override
@@ -148,11 +162,11 @@ public class MainActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "SECTION 1";
+                    return "NowPlayingFragment";
                 case 1:
-                    return "SECTION 2";
+                    return "ComingSoonFragment";
                 case 2:
-                    return "SECTION 3";
+                    return "TopRateFragment";
             }
             return null;
         }
