@@ -55,7 +55,7 @@ public class SourceAdapter extends RecyclerView.Adapter<SourceAdapter.ViewHolder
     }
 
     public interface ISourceAdapter {
-        void showArticles(String id, String name, String sortBy);
+        void showArticles(String poster_path, String overview, String release_date, String title, String backdrop_path, String vote_average, String id, String name, String sortBy);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -68,7 +68,13 @@ public class SourceAdapter extends RecyclerView.Adapter<SourceAdapter.ViewHolder
             tvName = (TextView) itemView.findViewById(R.id.textViewName);
             tvDesc = (TextView) itemView.findViewById(R.id.textViewDesc);
             ivPoster = (ImageView) itemView.findViewById(R.id.imageView);
-
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Source source = list.get(getAdapterPosition());
+                    mISourceAdapter.showArticles(source.poster_path, source.overview, source.release_date, source.title, source.backdrop_path, source.vote_average, source.original_language, source.popularity, source.vote_count);
+                }
+            });
         }
     }
 }

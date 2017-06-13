@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import id.sch.smktelkom_mlg.privateassignment.xirpl433.myfavoritemovie.adapter.SourceAdapter;
+import id.sch.smktelkom_mlg.privateassignment.xirpl433.myfavoritemovie.sugar.FavoriteFragment;
 
 public class MainActivity extends AppCompatActivity implements SourceAdapter.ISourceAdapter {
 
@@ -29,6 +30,17 @@ public class MainActivity extends AppCompatActivity implements SourceAdapter.ISo
      * may be best to switch to a
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
+
+    public static final String RESULTPOSTER = "resultPoster";
+    public static final String RESULTOVER = "resultOverview";
+    public static final String RESULTRELEASE = "resultRelease";
+    public static final String RESULTTITLE = "resultTitle";
+    public static final String RESULTBACK = "resultBackdrop";
+    public static final String RESULTVOTE = "resultOver";
+    public static final String RESULTLANGUAGE = "resultLanguage";
+    public static final String RESULTPOPULARITY = "resultPopularity";
+    public static final String RESULTVOTECOUNT = "resultVote";
+
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
     /**
@@ -89,8 +101,18 @@ public class MainActivity extends AppCompatActivity implements SourceAdapter.ISo
     }
 
     @Override
-    public void showArticles(String id, String name, String sortBy) {
-
+    public void showArticles(String poster_path, String overview, String release_date, String title, String backdrop_path, String vote_average, String original_language, String popularity, String vote_count) {
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra(RESULTPOSTER, poster_path);
+        intent.putExtra(RESULTOVER, overview);
+        intent.putExtra(RESULTRELEASE, release_date);
+        intent.putExtra(RESULTTITLE, title);
+        intent.putExtra(RESULTBACK, backdrop_path);
+        intent.putExtra(RESULTVOTE, vote_average);
+        intent.putExtra(RESULTLANGUAGE, original_language);
+        intent.putExtra(RESULTPOPULARITY, popularity);
+        intent.putExtra(RESULTVOTECOUNT, vote_count);
+        startActivity(intent);
     }
 
     /**
@@ -147,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements SourceAdapter.ISo
             else if (position == 1)
                 return new ComingSoonFragment();
             else if (position == 2)
-                return new TopRateFragment();
+                return new FavoriteFragment();
             else
                 return PlaceholderFragment.newInstance(position + 1);
         }
@@ -166,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements SourceAdapter.ISo
                 case 1:
                     return "ComingSoonFragment";
                 case 2:
-                    return "TopRateFragment";
+                    return "Favorite Fragment";
             }
             return null;
         }
