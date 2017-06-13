@@ -33,6 +33,6 @@ Local Database | Local Database
 ------------ | -------------
 <img src="https://user-images.githubusercontent.com/22072093/27067869-4764f2fa-5037-11e7-8672-cf58167586f4.png" width="300" height="500" />|<img src="https://user-images.githubusercontent.com/22072093/27067873-477d9404-5037-11e7-8f5f-6867d29ea39e.png" width="300" height="500" />
 
-Detail | FAB
+FAB | Detail
 ------------ | ------------
 <img src="https://user-images.githubusercontent.com/22072093/27067872-477b5108-5037-11e7-964b-c7e03bfd12ed.png" width="300" height="500" />|<img src="https://user-images.githubusercontent.com/22072093/27067874-47818b72-5037-11e7-975c-09ed9e51378e.png" width="300" height="500" />
